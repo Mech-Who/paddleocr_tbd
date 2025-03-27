@@ -8,6 +8,15 @@ from PIL import Image
 
 
 def load_model(lang: str = "ch") -> PaddleOCR:
+    """
+    PaddleOCR的参数通过在安装了paddleocr库的虚拟环境中，通过命令`paddleocr --help`进行查看
+    det_model_dir = ""
+    rec_model_dir = ""
+    cls_model_dir = ""
+    sr_model_dir = ""
+    ser_model_dir = ""
+    re_model_dir = ""
+    """
     # load OCR model
     ocr_model = PaddleOCR(
         lang=lang
