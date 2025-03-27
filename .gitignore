@@ -11,5 +11,8 @@ wheels/
 
 # dotenv
 *.env
+
+# user files
 logs/
 checkpoints/
+caches/
