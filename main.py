@@ -1,7 +1,9 @@
 # standard library
+import shutil
 from typing import List
 
 # third-party
+import cv2
 from dotenv import load_dotenv
 from paddleocr import PaddleOCR, draw_ocr
 from PIL import Image
@@ -24,7 +26,16 @@ def load_model(lang: str = "ch") -> PaddleOCR:
     return ocr_model
 
 
+def preprocess(img_path: str):
+    shutil.copy(img_path, f"{img_path}.bak")  # make a backup
+    img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰度化
+    # _, img = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY)  # 二值化
+    cv2.imwrite(img_path, img)
+
+
 def run_ocr(ocr_model: PaddleOCR, img_path: str) -> List[List[str]]:
+    preprocess(img_path)
     result = ocr_model.ocr(img_path, cls=False)
     return result
 
